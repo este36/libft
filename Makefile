@@ -32,6 +32,7 @@ $(LIBFT_DIR)/ft_strdup.c\
 $(LIBFT_DIR)/ft_substr.c\
 $(LIBFT_DIR)/ft_strjoin.c\
 $(LIBFT_DIR)/ft_strtrim.c\
+$(LIBFT_DIR)/ft_strtrim_fn.c\
 $(LIBFT_DIR)/ft_split.c\
 $(LIBFT_DIR)/ft_itoa.c\
 $(LIBFT_DIR)/ft_utoa.c\

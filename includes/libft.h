@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/11 18:41:50 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/11 19:07:10 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim_fn(char const *s1, int (*fn)(int c));
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int n);
