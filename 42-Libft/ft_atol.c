@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                           :+:    :+:           */
+/*   ft_atol.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 19:51:33 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/11 18:38:28 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/11 18:40:28 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	size_t	i;
 	int		is_minus;
-	int		num;
+	long	num;
 
 	i = 0;
 	num = 0;
@@ -37,6 +37,6 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	if (is_minus)
-		num *= -1;
+		num = -num;
 	return (num);
 }

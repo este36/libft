@@ -5,6 +5,7 @@ CFLAGS = -g -Wall -Wextra -Werror
 LIBFT_DIR = 42-Libft
 LIBFT_SRCS =\
 $(LIBFT_DIR)/ft_isalpha.c\
+$(LIBFT_DIR)/ft_isspace.c\
 $(LIBFT_DIR)/ft_memcpy.c\
 $(LIBFT_DIR)/ft_strrchr.c\
 $(LIBFT_DIR)/ft_isdigit.c\
@@ -25,6 +26,7 @@ $(LIBFT_DIR)/ft_strnstr.c\
 $(LIBFT_DIR)/ft_bzero.c\
 $(LIBFT_DIR)/ft_strchr.c\
 $(LIBFT_DIR)/ft_atoi.c\
+$(LIBFT_DIR)/ft_atol.c\
 $(LIBFT_DIR)/ft_calloc.c\
 $(LIBFT_DIR)/ft_strdup.c\
 $(LIBFT_DIR)/ft_substr.c\
@@ -74,14 +76,15 @@ $(GNL_DIR)/get_next_line_utils.c\
 
 INCLUDES = includes
 SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
-OBJS = $(LIBFT_SRCS:%.c=%.o) $(FT_PRINTF_SRCS:%.c=%.o) $(GNL_SRCS:%.c=%.o)
+OBJS = $(LIBFT_SRCS:%.c=obj/%.o) $(FT_PRINTF_SRCS:%.c=obj/%.o) $(GNL_SRCS:%.c=obj/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
-%.o: %.c
+obj/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) -c $(CFLAGS) -I$(INCLUDES) $< -o $@
 
 clean:
