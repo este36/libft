@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 19:53:40 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 19:55:57 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 20:06:32 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*get_next_substr(char const *s, int (*fn)(int c), size_t *pos)
 }
 
 static int	alloc_substrs(char **dst, const size_t substr_count,
-					char const *s,  int (*fn)(int c))
+					char const *s, int (*fn)(int c))
 {
 	size_t	dst_pos;
 	size_t	s_pos;
