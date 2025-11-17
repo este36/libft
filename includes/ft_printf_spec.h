@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 16:07:15 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 21:28:36 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 22:54:43 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ int								write_fd(t_ft_printf_spec *spec);
 int								write_dstr(t_ft_printf_spec *spec);
 int								write_str(t_ft_printf_spec *spec);
 int								write_stdout(t_ft_printf_spec *spec);
-
-int								cleanup_and_fail(va_list *arg_list);
-int								print_safe_raw_bytes(const char **fmt,
-									int *print_count);
-bool							lookup(va_list *arg_list,
-									t_ft_printf_spec *spec, int *print_count);
+int								write_raw(
+									t_write_op write_op,
+									void *user_out,
+									const char *fmt,
+									size_t len);
 
 int								ft_printf_fn(
 									t_write_op write_op,

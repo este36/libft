@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 20:32:23 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 21:39:12 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 22:53:51 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ bool	lookup(va_list *arg_list, t_ft_printf_spec *spec, int *print_count)
 	return (true);
 }
 
-int	print_safe_raw_bytes(const char **fmt, int *print_count)
+int	print_safe_raw_bytes(
+					const char **fmt,
+					int *print_count,
+					t_write_op write_op,
+					void *user_out)
 {
 	const char	*next_percent = ft_strchr(*fmt, '%');
 	int			printed;
@@ -46,7 +50,7 @@ int	print_safe_raw_bytes(const char **fmt, int *print_count)
 		printed = ft_strlen(*fmt);
 	else
 		printed = (next_percent - *fmt);
-	if (write(1, *fmt, printed) < 0)
+	if (write_raw(write_op, user_out, *fmt, printed) < 0)
 		return (false);
 	*fmt += printed;
 	*print_count += printed;
@@ -60,7 +64,7 @@ int	cleanup_and_fail(va_list *arg_list)
 }
 
 int	ft_printf_fn(
-		t_write_op write_op, void *user_write_output,
+		t_write_op write_op, void *user_out,
 		const char *fmt, va_list *arg_list)
 {
 	int					print_count;
@@ -69,13 +73,13 @@ int	ft_printf_fn(
 	print_count = 0;
 	while (*fmt)
 	{
-		if (!print_safe_raw_bytes(&fmt, &print_count))
+		if (!print_safe_raw_bytes(&fmt, &print_count, write_op, user_out))
 			return (cleanup_and_fail(arg_list));
 		if (*fmt)
 		{
 			fmt++;
 			parse_spec(&spec, &fmt, arg_list);
-			spec.user_write_output = user_write_output;
+			spec.user_write_output = user_out;
 			spec.write_cb = write_op;
 			if (!lookup(arg_list, &spec, &print_count))
 				return (cleanup_and_fail(arg_list));
