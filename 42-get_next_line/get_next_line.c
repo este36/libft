@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                     :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:04:24 by emercier          #+#    #+#             */
-/*   Updated: 2025/10/31 16:02:16 by emercier         ###   ####lausanne.ch   */
+/*   Updated: 2025/11/17 19:37:44 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include "libft.h"
 #include "get_next_line.h"
 
 static bool	init_state(

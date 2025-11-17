@@ -73,7 +73,6 @@ $(FT_PRINTF_DIR)/print_uint.c\
 GNL_DIR = 42-get_next_line
 GNL_SRCS =\
 $(GNL_DIR)/get_next_line.c\
-$(GNL_DIR)/get_next_line_utils.c\
 
 INCLUDES = includes
 SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
