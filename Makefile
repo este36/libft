@@ -8,6 +8,7 @@ $(LIBFT_DIR)/ft_isalpha.c\
 $(LIBFT_DIR)/ft_isspace.c\
 $(LIBFT_DIR)/ft_memcpy.c\
 $(LIBFT_DIR)/ft_strrchr.c\
+$(LIBFT_DIR)/ft_strrchr_fn.c\
 $(LIBFT_DIR)/ft_isdigit.c\
 $(LIBFT_DIR)/ft_memmove.c\
 $(LIBFT_DIR)/ft_strncmp.c\
