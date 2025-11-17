@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 16:07:15 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/11 12:14:43 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 21:28:36 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 typedef struct ft_printf_spec	t_ft_printf_spec;
 
 typedef bool					(*t_apply_precision)(t_ft_printf_spec *spec);
-
 typedef bool					(*t_get_print_buf)(t_ft_printf_spec *spec);
+typedef int						(*t_write_op)(t_ft_printf_spec *spec);
 
 typedef struct ft_printf_spec
 {
@@ -39,6 +39,7 @@ typedef struct ft_printf_spec
 	uint32_t			precision;
 	uint32_t			min_width;
 	void				*user_data;
+	void				*user_write_output;
 	t_str_ref			val;
 	t_str_ref			prec_padding;
 	t_str_ref			padding;
@@ -46,6 +47,7 @@ typedef struct ft_printf_spec
 	bool				is_negative;
 	t_apply_precision	apply_precision;
 	t_get_print_buf		get_print_buf;
+	t_write_op			write_cb;
 }								t_ft_printf_spec;
 
 void							parse_spec(
@@ -59,4 +61,20 @@ bool							apply_precision_int(t_ft_printf_spec *spec);
 bool							get_print_buf_int(t_ft_printf_spec *spec);
 char							*get_hex(uint64_t n, int uppercase);
 
+int								write_fd(t_ft_printf_spec *spec);
+int								write_dstr(t_ft_printf_spec *spec);
+int								write_str(t_ft_printf_spec *spec);
+int								write_stdout(t_ft_printf_spec *spec);
+
+int								cleanup_and_fail(va_list *arg_list);
+int								print_safe_raw_bytes(const char **fmt,
+									int *print_count);
+bool							lookup(va_list *arg_list,
+									t_ft_printf_spec *spec, int *print_count);
+
+int								ft_printf_fn(
+									t_write_op write_op,
+									void *user_write_output,
+									const char *fmt,
+									va_list *arg_list);
 #endif // FT_PRINTF_SPEC_H

@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:49:47 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/11 12:18:51 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 20:29:34 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ int	print_padded(t_ft_printf_spec *spec)
 		spec->get_print_buf = get_print_buf;
 	if (!spec->get_print_buf(spec))
 		return (-1);
-	printed = write(1, spec->toprint.buf, spec->toprint.len);
+	if (spec->write_cb == NULL)
+		spec->write_cb = write_stdout;
+	printed = spec->write_cb(spec);
 	free(spec->toprint.buf);
 	free(spec->padding.buf);
 	free(spec->val.buf);
