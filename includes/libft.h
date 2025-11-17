@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 19:40:59 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/17 19:55:23 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strchr_fn(const char *s, int (*fn)(int c));
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -67,6 +68,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, const size_t s_len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_fn(char const *s1, char const *s2, int (*fn)(int c));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strtrim_fn(char const *s1, int (*fn)(int c));
 char	**ft_split(char const *s, char c);
