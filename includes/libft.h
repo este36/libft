@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/18 15:56:54 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/18 16:49:02 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ t_list	*ft_lstget(t_list *lst, size_t index);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstlast_back(t_list **lst, t_list *new);
-void	ft_lstpop_front(t_list **lst, void (*del)(void *));
-void	ft_lstpop_back(t_list **lst, void (*del)(void *));
+t_list	*ft_lstpop_front(t_list **lst);
+t_list	*ft_lstpop_back(t_list **lst);
 void	ft_lstrot_front(t_list **lst);
 void	ft_lstrot_back(t_list **lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);

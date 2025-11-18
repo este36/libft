@@ -6,17 +6,17 @@
 /*   By: emercier <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/11/18 13:25:13 by emercier       #+#    #+#                */
-/*   Updated: 2025/11/18 14:07:50 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/18 16:51:40 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstpop_front(t_list **lst, void (*del)(void *))
+t_list	*ft_lstpop_front(t_list **lst)
 {
-	t_list	*next;
+	t_list	*prev_head;
 
-	next = (*lst)->next;
-	del((*lst)->content);
-	free(*lst);
+	prev_head = *lst;
+	*lst = (*lst)->next;
+	return (prev_head);
 }

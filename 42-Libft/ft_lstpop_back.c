@@ -6,26 +6,27 @@
 /*   By: emercier <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/11/18 13:29:13 by emercier       #+#    #+#                */
-/*   Updated: 2025/11/18 14:08:01 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/18 16:54:37 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstpop_back(t_list **lst, void (*del)(void *))
+t_list	*ft_lstpop_back(t_list **lst)
 {
 	t_list	*head;
+	t_list	*prev_tail;
 
 	head = *lst;
 	while (head)
 	{
 		if (head->next != NULL && head->next->next == NULL)
 		{
-			del(head->next->content);
-			free(head->next);
+			prev_tail = head->next;
 			head->next = NULL;
-			return ;
+			return (prev_tail);
 		}
 		head = head->next;
 	}
+	return (*lst);
 }
