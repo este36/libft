@@ -49,8 +49,6 @@ $(LIBFT_DIR)/ft_putendl_fd.c\
 $(LIBFT_DIR)/ft_putnbr_fd.c\
 $(LIBFT_DIR)/ft_lstnew.c\
 $(LIBFT_DIR)/ft_lstget.c\
-$(LIBFT_DIR)/ft_lstswap_front.c\
-$(LIBFT_DIR)/ft_lstswap_back.c\
 $(LIBFT_DIR)/ft_lstrot_front.c\
 $(LIBFT_DIR)/ft_lstrot_back.c\
 $(LIBFT_DIR)/ft_lstpop_front.c\
