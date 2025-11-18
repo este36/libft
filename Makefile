@@ -30,6 +30,7 @@ $(LIBFT_DIR)/ft_strchr_fn.c\
 $(LIBFT_DIR)/ft_atoi.c\
 $(LIBFT_DIR)/ft_atol.c\
 $(LIBFT_DIR)/ft_calloc.c\
+$(LIBFT_DIR)/ft_realloc.c\
 $(LIBFT_DIR)/ft_strdup.c\
 $(LIBFT_DIR)/ft_strndup.c\
 $(LIBFT_DIR)/ft_substr.c\
