@@ -48,6 +48,13 @@ $(LIBFT_DIR)/ft_putstr_fd.c\
 $(LIBFT_DIR)/ft_putendl_fd.c\
 $(LIBFT_DIR)/ft_putnbr_fd.c\
 $(LIBFT_DIR)/ft_lstnew.c\
+$(LIBFT_DIR)/ft_lstget.c\
+$(LIBFT_DIR)/ft_lstswap_front.c\
+$(LIBFT_DIR)/ft_lstswap_back.c\
+$(LIBFT_DIR)/ft_lstrot_front.c\
+$(LIBFT_DIR)/ft_lstrot_back.c\
+$(LIBFT_DIR)/ft_lstpop_front.c\
+$(LIBFT_DIR)/ft_lstpop_back.c\
 $(LIBFT_DIR)/ft_lstadd_front.c\
 $(LIBFT_DIR)/ft_lstadd_back.c\
 $(LIBFT_DIR)/ft_lstsize.c\
@@ -80,7 +87,7 @@ GNL_DIR = 42-get_next_line
 GNL_SRCS =\
 $(GNL_DIR)/get_next_line.c\
 
-INCLUDES = includes
+INCLUDES = -Iincludes
 SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
 OBJS = $(LIBFT_SRCS:%.c=obj/%.o) $(FT_PRINTF_SRCS:%.c=obj/%.o) $(GNL_SRCS:%.c=obj/%.o)
 
@@ -92,7 +99,7 @@ $(NAME): $(OBJS)
 
 obj/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $(CFLAGS) -I$(INCLUDES) $< -o $@
+	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	rm -rf $(OBJS) obj

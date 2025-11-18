@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 20:03:25 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/18 15:16:41 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,16 @@ typedef struct s_list
 }	t_list;
 
 t_list	*ft_lstnew(void *content);
+t_list	*ft_lstget(t_list *lst, size_t index);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstlast_back(t_list **lst, t_list *new);
+void	ft_lstswap_front(t_list **dst, t_list **src, size_t count);
+void	ft_lstswap_back(t_list **dst, t_list **src, size_t count);
+void	ft_lstpop_front(t_list **lst, void (*del)(void *));
+void	ft_lstpop_back(t_list **lst, void (*del)(void *));
+void	ft_lstrot_front(t_list **lst);
+void	ft_lstrot_back(t_list **lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
