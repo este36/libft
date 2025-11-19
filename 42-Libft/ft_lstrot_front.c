@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/11/18 13:49:41 by emercier       #+#    #+#                */
-/*   Updated: 2025/11/19 14:31:32 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/19 16:13:49 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_lstrot_front(t_list **lst)
 				*lst = head->next;
 				(*lst)->next = start;
 				(*lst)->next->next = NULL;
+				return ;
 			}
 			*lst = start->next;
 			start->next = NULL;
