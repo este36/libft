@@ -118,7 +118,7 @@ char	*get_next_line(int fd)
 	while (!line_found(&state))
 	{
 		state.read.len = read(fd, state.read.buf, BUFFER_SIZE);
-		if (state.read.len < 0)
+		if (state.read.len == (size_t) - 1)
 		{
 			free(state.read.buf);
 			free(state.acc->buf);
