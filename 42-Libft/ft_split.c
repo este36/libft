@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split.c                                          :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 19:53:40 by emercier          #+#    #+#             */
-/*   Updated: 2025/10/03 19:30:05 by emercier         ###   ####lausanne.ch   */
+/*   Updated: 2025/11/28 17:29:17 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	alloc_substrs(char **dst, const size_t substr_count,
 	return (0);
 }
 
-static void	str_arr_free(char **strs)
+void	str_arr_free(char **strs)
 {
 	size_t	i;
 

@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 19:53:40 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 20:06:32 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/28 17:29:30 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	alloc_substrs(char **dst, const size_t substr_count,
 	return (0);
 }
 
-static void	str_arr_free(char **strs)
+void	str_arr_free(char **strs)
 {
 	size_t	i;
 

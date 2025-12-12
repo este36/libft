@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2025/11/18 13:35:18 by emercier       #+#    #+#                */
-/*   Updated: 2025/11/18 14:06:14 by emercier       ########   odam.nl        */
+/*   Updated: 2025/11/21 14:26:57 by emercier       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	ft_lstrot_back(t_list **lst)
 	{
 		if (head->next != NULL && head->next->next == NULL)
 		{
+			if (head == start)
+			{
+				*lst = head->next;
+				(*lst)->next = start;
+				(*lst)->next->next = NULL;
+				return ;
+			}
 			head->next->next = start;
 			*lst = head->next;
 			head->next = NULL;
