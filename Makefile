@@ -68,6 +68,7 @@ FT_PRINTF_DIR = 42-ft_printf
 FT_PRINTF_SRCS =\
 $(FT_PRINTF_DIR)/ft_printf.c\
 $(FT_PRINTF_DIR)/ft_printf_ops.c\
+$(FT_PRINTF_DIR)/temp_sprintf.c\
 $(FT_PRINTF_DIR)/padding.c\
 $(FT_PRINTF_DIR)/precision_int.c\
 $(FT_PRINTF_DIR)/get_hex.c\
