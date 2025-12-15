@@ -20,5 +20,6 @@ void	*ft_realloc(void *ptr, size_t prev_size, size_t size)
 	if (!new)
 		return (NULL);
 	ft_memcpy(new, ptr, prev_size);
+	free(ptr);
 	return (new);
 }
