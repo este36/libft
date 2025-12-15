@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:59 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/15 22:24:52 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:40:19 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	ft_darr_init(t_darr *a, size_t cap, size_t el_size)
 {
-	a->len = 0;
+	ft_bzero(a, sizeof(t_darr));
 	a->el_size = el_size;
 	a->cap = cap;
 	a->arr = ft_calloc((cap + 1), el_size);
-	if (a->arr)
+	if (a->arr == NULL)
 		return (-1);
 	return (0);
 }
 
 int	ft_darr_push(t_darr *a, void *el)
 {
-	if (a->len + 1 >= a->cap)
+	if (a->len + 1 > a->cap)
 	{
 		if (a->cap == 0)
 		{
@@ -50,5 +50,7 @@ int	ft_darr_push(t_darr *a, void *el)
 
 void	*ft_darr_get(t_darr *a, size_t index)
 {
+	if (index >= a->len)
+		return (NULL);
 	return ((uint8_t *)a->arr + index * a->el_size);
 }
