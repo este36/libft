@@ -6,14 +6,14 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:30:36 by emercier          #+#    #+#             */
-/*   Updated: 2025/10/24 18:22:18 by emercier         ###   ####lausanne.ch   */
+/*   Updated: 2025/12/15 21:47:57 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static	int	ft_dstr_realloc(t_dstr *dst)
+static	bool	ft_dstr_realloc(t_dstr *dst)
 {
 	char		*new;
 	size_t		new_cap;
@@ -24,7 +24,7 @@ static	int	ft_dstr_realloc(t_dstr *dst)
 		new_cap = dst->cap * 2;
 	new = (char *)malloc(sizeof(char) * new_cap);
 	if (new == NULL)
-		return (0);
+		return (false);
 	if (dst->buf != NULL)
 	{
 		ft_strlcpy(new, dst->buf, dst->cap);
@@ -32,7 +32,7 @@ static	int	ft_dstr_realloc(t_dstr *dst)
 	}
 	dst->cap = new_cap;
 	dst->buf = new;
-	return (1);
+	return (true);
 }
 
 int	ft_dstr_init(t_dstr *s, size_t cap)

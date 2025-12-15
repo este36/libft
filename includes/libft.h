@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                             :+:    :+:           */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/28 17:29:10 by emercier       ########   odam.nl        */
+/*   Updated: 2025/12/15 21:54:34 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # define MIN_DSTR_CAP 256
+# define MIN_DARR_CAP 256
 
 # include <stddef.h>
 # include <stdlib.h>
@@ -33,6 +34,19 @@ typedef struct s_str_ref
 	char	*buf;
 	size_t	len;
 }	t_str_ref;
+
+typedef struct s_darr
+{
+	void	*arr;
+	size_t	len;
+	size_t	cap;
+	size_t	el_size;
+}	t_darr;
+
+int		ft_darr_init(t_darr *s, size_t cap, size_t el_size);
+int		ft_darr_push(t_darr *s, void *el);
+int		ft_darr_push_many(t_darr *s, ...);
+void	*ft_darr_get(t_darr *s, size_t index);
 
 int		ft_dstr_init(t_dstr *s, size_t cap);
 int		ft_dstrputc(t_dstr *dst, char c);
