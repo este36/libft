@@ -6,26 +6,55 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:00 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 14:06:27 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:03:26 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdalign.h>
 
-t_hmap_hash	str_ref_hash(t_hmap *hmap, void *key)
+t_hmap_hash	str_ref_hash(t_str_ref *key)
 {
-	(void)hmap;
-	(void)key;
-	return (0);
+	t_hmap_hash	hash;
+	size_t		i;
+
+	i = 0;
+	hash = 5381;
+	while (i < key->len)
+	{
+		hash = ((hash << 5) + hash) + (uint8_t)key->buf[i];
+		i++;
+	}
+	return (hash);
 }
 
 int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 {
-	(void)h;
-	(void)key;
-	(void)val;
-	return (0);
+	size_t		slot_index;
+	size_t		i;
+	t_hmap_hash	hash;
+
+	hash = h->hash_fn(key);
+	slot_index = hash % h->capacity;
+	hash |= 2;
+	i = 0;
+	while (i < h->capacity)
+	{
+		slot_index = (slot_index + i) % h->capacity;
+		if (*(t_hmap_hash *)(h->data + slot_index * h->slot_size
+			+ h->hash_off) == HMAP_SLOT_EMPTY)
+		{
+			ft_memcpy(h->data + slot_index * h->slot_size + h->hash_off,
+				&hash, sizeof(t_hmap_hash));
+			ft_memcpy(h->data + slot_index * h->slot_size + h->key_off,
+				key, h->key_size);
+			ft_memcpy(h->data + slot_index * h->slot_size + h->val_off,
+				val, h->val_size);
+			return (0);
+		}
+		i++;
+	}
+	return (-1);
 }
 
 void	*ft_hmap_get(t_hmap *h, void *key)

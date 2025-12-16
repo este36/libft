@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 14:07:34 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:30:39 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ enum e_hmap_slot_state
 
 typedef uint64_t		t_hmap_hash;
 typedef struct s_hmap	t_hmap;
-typedef t_hmap_hash		(*t_hmap_hash_fn)(t_hmap *h, void *key);
+typedef t_hmap_hash		(*t_hmap_hash_fn)(void *key);
 typedef int				(*t_hmap_cmp_fn)(void *, void *);
 
 typedef struct s_hmap
