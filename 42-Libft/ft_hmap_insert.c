@@ -6,46 +6,49 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:54:44 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 21:56:05 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 22:44:41 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static inline uint8_t	*_probe(t_hmap *h, void *key, t_hmap_hash hash)
+static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {
-	uint8_t		*slot;
-	size_t		slot_index;
-	t_hmap_hash	slot_hash;
-	size_t		i;
+	size_t			first_slot;
+	t_hmap__slot	slot;
+	t_hmap__slot	tomb;
+	size_t			i;
 
-	slot_index = hash % h->capacity;
+	first_slot = hash % h->capacity;
 	i = 0;
+	ft_bzero(&slot, sizeof(slot));
+	ft_bzero(&tomb, sizeof(tomb));
 	while (i < h->capacity)
 	{
-		slot_index = (slot_index + i) % h->capacity;
-		slot = h->data + (slot_index * h->slot_size);
-		slot_hash = *(t_hmap_hash *)(slot + h->hash_off);
-		if (slot_hash <= HMAP_SLOT_DELETED
-			|| (slot_hash == hash && (h->cmp_fn(slot + h->key_off, key) == 0)))
+		ft_hmap__slot(h, &slot, (first_slot + i) % h->capacity);
+		if ((*slot.hash == hash && h->cmp_fn(slot.key, key) == 0))
+			return (slot);
+		if (*slot.hash == HMAP_SLOT_DELETED)
+			tomb = slot;
+		else if (*slot.hash == HMAP_SLOT_EMPTY)
 			return (slot);
 		i++;
 	}
-	return (NULL);
+	return (tomb);
 }
 
 int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 {
-	t_hmap_hash	hash;
-	uint8_t		*slot;
+	t_hmap_hash		hash;
+	t_hmap__slot	slot;
 
 	hash = h->hash_fn(key);
 	hash |= 2;
 	slot = _probe(h, key, hash);
-	if (slot == NULL)
+	if (slot.ptr == NULL)
 		return (-1);
-	ft_memcpy(slot + h->hash_off, &hash, sizeof(t_hmap_hash));
-	ft_memcpy(slot + h->key_off, key, h->key_size);
-	ft_memcpy(slot + h->val_off, val, h->val_size);
+	ft_memcpy(slot.hash, &hash, sizeof(t_hmap_hash));
+	ft_memcpy(slot.key, key, h->key_size);
+	ft_memcpy(slot.val, val, h->val_size);
 	return (0);
 }

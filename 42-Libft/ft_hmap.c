@@ -13,6 +13,15 @@
 #include "libft.h"
 #include <stdalign.h>
 
+void	ft_hmap__slot(t_hmap *h, t_hmap__slot *slot, size_t index)
+{
+	slot->index = index;
+	slot->ptr = h->data + (slot->index * h->slot_size);
+	slot->hash = (slot->ptr + h->hash_off);
+	slot->key = (slot->ptr + h->key_off);
+	slot->val = (slot->ptr + h->val_off);
+}
+
 int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)
 {
 	const size_t	_a = sizeof(t_max_align);

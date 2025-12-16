@@ -12,38 +12,36 @@
 
 #include "libft.h"
 
-static inline uint8_t	*_probe(t_hmap *h, void *key, t_hmap_hash hash)
+static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {
-	uint8_t		*slot;
-	size_t		slot_index;
-	t_hmap_hash	slot_hash;
-	size_t		i;
+	t_hmap__slot	slot;
+	size_t			first_slot;
+	size_t			i;
 
-	slot_index = hash % h->capacity;
+	first_slot = hash % h->capacity;
+	ft_bzero(&slot, sizeof(slot));
 	i = 0;
 	while (i < h->capacity)
 	{
-		slot_index = (slot_index + i) % h->capacity;
-		slot = h->data + (slot_index * h->slot_size);
-		slot_hash = *(t_hmap_hash *)(slot + h->hash_off);
-		if (slot_hash == HMAP_SLOT_EMPTY)
-			return (NULL);
-		if (slot_hash == hash && h->cmp_fn(slot + h->key_off, key) == 0)
+		ft_hmap__slot(h, &slot, (first_slot + i) % h->capacity);
+		if (*slot.hash == HMAP_SLOT_EMPTY)
+			return ((t_hmap__slot){0});
+		if (*slot.hash == hash && h->cmp_fn(slot.key, key) == 0)
 			return (slot);
 		i++;
 	}
-	return (NULL);
+	return ((t_hmap__slot){0});
 }
 
 void	*ft_hmap_get(t_hmap *h, void *key)
 {
-	t_hmap_hash	hash;
-	uint8_t		*slot;
+	t_hmap_hash		hash;
+	t_hmap__slot	slot;
 
 	hash = h->hash_fn(key);
 	hash |= 2;
 	slot = _probe(h, key, hash);
-	if (slot == NULL)
+	if (slot.ptr == NULL)
 		return (NULL);
-	return (slot + h->val_off);
+	return (slot.val);
 }

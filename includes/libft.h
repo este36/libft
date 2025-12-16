@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 14:30:39 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 22:44:27 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,15 @@ typedef struct s_hmap
 	t_hmap_cmp_fn	cmp_fn;
 }	t_hmap;
 
+typedef struct s_hmap__slot
+{
+	void		*ptr;
+	size_t		index;
+	t_hmap_hash	*hash;
+	void		*key;
+	void		*val;
+}	t_hmap__slot;
+
 int			ft_hmap_init(
 				t_hmap *h,
 				size_t cap,
@@ -96,6 +105,7 @@ int			ft_hmap_insert(t_hmap *h, void *key, void *val);
 int			ft_hmap_delete(t_hmap *h, void *key);
 void		*ft_hmap_get(t_hmap *h, void *key);
 t_hmap_hash	str_ref_hash(t_str_ref *key);
+void		ft_hmap__slot(t_hmap *h, t_hmap__slot *slot, size_t index);
 
 int			ft_dstr_init(t_dstr *s, size_t cap);
 int			ft_dstrputc(t_dstr *dst, char c);
