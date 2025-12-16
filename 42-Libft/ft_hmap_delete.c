@@ -43,8 +43,6 @@ int	ft_hmap_delete(t_hmap *h, void *key)
 	slot = _probe(h, key, hash);
 	if (slot.ptr == NULL)
 		return (-1);
-	if (*slot.hash == HMAP_SLOT_DELETED)
-		return (-1);
 	*slot.hash = HMAP_SLOT_DELETED;
 	return (0);
 }

@@ -28,8 +28,10 @@ static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 		ft_hmap__slot(h, &slot, (first_slot_index + i) % h->capacity);
 		if ((*slot.hash == hash && h->cmp_fn(slot.key, key) == 0))
 			return (slot);
-		if (*slot.hash == HMAP_SLOT_DELETED)
+		if (tomb.ptr == NULL && *slot.hash == HMAP_SLOT_DELETED)
 			tomb = slot;
+		else if (tomb.ptr != NULL && *slot.hash == HMAP_SLOT_EMPTY)
+			return (tomb);
 		else if (*slot.hash == HMAP_SLOT_EMPTY)
 			return (slot);
 		i++;
