@@ -23,3 +23,18 @@ t_str_ref	c_str_ref(const char *s)
 {
 	return ((t_str_ref){.buf = (char *)s, .len = ft_strlen(s)});
 }
+
+t_hmap_hash	str_ref_hash(t_str_ref *key)
+{
+	t_hmap_hash	hash;
+	size_t		i;
+
+	i = 0;
+	hash = 5381;
+	while (i < key->len)
+	{
+		hash = ((hash << 5) + hash) + (uint8_t)key->buf[i];
+		i++;
+	}
+	return (hash);
+}

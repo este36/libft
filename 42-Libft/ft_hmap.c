@@ -13,74 +13,79 @@
 #include "libft.h"
 #include <stdalign.h>
 
-t_hmap_hash	str_ref_hash(t_str_ref *key)
+static uint8_t	*hmap_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {
-	t_hmap_hash	hash;
+	size_t		base;
+	size_t		slot;
 	size_t		i;
+	t_hmap_hash	slot_hash;
+	uint8_t		*p;
 
+	base = hash % h->capacity;
 	i = 0;
-	hash = 5381;
-	while (i < key->len)
+	while (i < h->capacity)
 	{
-		hash = ((hash << 5) + hash) + (uint8_t)key->buf[i];
+		slot = (base + i) % h->capacity;
+		p = h->data + slot * h->slot_size;
+		slot_hash = *(t_hmap_hash *)(p + h->hash_off);
+		if (slot_hash == HMAP_SLOT_EMPTY
+			|| (slot_hash == hash && h->cmp_fn(p + h->key_off, key) == 0))
+			return (p);
 		i++;
 	}
-	return (hash);
+	return (NULL);
 }
 
 int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 {
-	size_t		slot_index;
-	size_t		i;
 	t_hmap_hash	hash;
+	t_hmap_hash	slot_hash;
+	uint8_t		*p;
 
 	hash = h->hash_fn(key);
-	slot_index = hash % h->capacity;
 	hash |= 2;
-	i = 0;
-	while (i < h->capacity)
+	p = hmap_probe(h, key, hash);
+	if (p == NULL)
+		return (-1);
+	slot_hash = *(t_hmap_hash *)(p + h->hash_off);
+	if (slot_hash == HMAP_SLOT_EMPTY || slot_hash == HMAP_SLOT_DELETED)
 	{
-		slot_index = (slot_index + i) % h->capacity;
-		if (*(t_hmap_hash *)(h->data + slot_index * h->slot_size
-			+ h->hash_off) == HMAP_SLOT_EMPTY)
-		{
-			ft_memcpy(h->data + slot_index * h->slot_size + h->hash_off,
-				&hash, sizeof(t_hmap_hash));
-			ft_memcpy(h->data + slot_index * h->slot_size + h->key_off,
-				key, h->key_size);
-			ft_memcpy(h->data + slot_index * h->slot_size + h->val_off,
-				val, h->val_size);
-			return (0);
-		}
-		i++;
+		ft_memcpy(p + h->hash_off, &hash, sizeof(t_hmap_hash));
+		ft_memcpy(p + h->key_off, key, h->key_size);
 	}
-	return (-1);
+	ft_memcpy(p + h->val_off, val, h->val_size);
+	return (0);
+}
+
+int	ft_hmap_delete(t_hmap *h, void *key)
+{
+	t_hmap_hash	hash;
+	uint8_t		*p;
+
+	hash = h->hash_fn(key);
+	hash |= 2;
+	p = hmap_probe(h, key, hash);
+	if (p == NULL || *(t_hmap_hash *)(p + h->hash_off) <= HMAP_SLOT_DELETED)
+		return (-1);
+	*(t_hmap_hash *)(p + h->hash_off) = HMAP_SLOT_DELETED;
+	return (0);
 }
 
 void	*ft_hmap_get(t_hmap *h, void *key)
 {
-	size_t		slot_index;
-	size_t		i;
 	t_hmap_hash	hash;
+	t_hmap_hash	slot_hash;
+	uint8_t		*p;
 
 	hash = h->hash_fn(key);
-	slot_index = hash % h->capacity;
 	hash |= 2;
-	i = 0;
-	while (i < h->capacity)
-	{
-		slot_index = (slot_index + i) % h->capacity;
-		if (*(t_hmap_hash *)(h->data + slot_index * h->slot_size
-			+ h->hash_off) == HMAP_SLOT_EMPTY)
-			return (NULL);
-		if (ft_memcmp(h->data + slot_index * h->slot_size + h->hash_off,
-				&hash, sizeof(t_hmap_hash)) == 0
-			&& h->cmp_fn(
-				h->data + slot_index * h->slot_size + h->key_off, key) == 0)
-			return (h->data + slot_index * h->slot_size + h->val_off);
-		i++;
-	}
-	return (NULL);
+	p = hmap_probe(h, key, hash);
+	if (p == NULL)
+		return (NULL);
+	slot_hash = *(t_hmap_hash *)(p + h->hash_off);
+	if (slot_hash == HMAP_SLOT_EMPTY)
+		return (NULL);
+	return (p + h->val_off);
 }
 
 int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)

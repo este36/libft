@@ -93,7 +93,9 @@ int			ft_hmap_init(
 				size_t key_size,
 				size_t val_size);
 int			ft_hmap_insert(t_hmap *h, void *key, void *val);
+int			ft_hmap_delete(t_hmap *h, void *key);
 void		*ft_hmap_get(t_hmap *h, void *key);
+t_hmap_hash	str_ref_hash(t_str_ref *key);
 
 int			ft_dstr_init(t_dstr *s, size_t cap);
 int			ft_dstrputc(t_dstr *dst, char c);
