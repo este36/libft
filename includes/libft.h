@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/15 21:54:34 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 01:11:23 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,48 @@ typedef struct s_darr
 	size_t	el_size;
 }	t_darr;
 
-int		ft_darr_init(t_darr *s, size_t cap, size_t el_size);
-int		ft_darr_push(t_darr *s, void *el);
-int		ft_darr_push_many(t_darr *s, ...);
-void	*ft_darr_get(t_darr *s, size_t index);
+typedef union u_max_align
+{
+	char	c;
+	short	s;
+	int		i;
+	long	l;
+	float	f;
+	double	d;
+	void	*p;
+}	t_max_align;
+
+enum e_hmap_slot_state
+{
+	HMAP_SLOT_EMPTY,
+	HMAP_SLOT_DELETED,
+	HMAP_SLOT_OCCUPIED,
+};
+
+typedef uint64_t		t_hmap_hash;
+typedef struct s_hmap	t_hmap;
+typedef t_hmap_hash		(*t_hmap_hash_fn)(t_hmap *h, void *key);
+
+typedef struct s_hmap
+{
+	uint8_t			*data;
+	size_t			capacity;
+	size_t			hash_off;
+	size_t			key_size;
+	size_t			key_off;
+	size_t			val_size;
+	size_t			val_off;
+	size_t			slot_size;
+	t_hmap_hash_fn	hash_fn;
+}	t_hmap;
+
+int		ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size);
+int		ft_hmap_insert(t_hmap *h, void *key, void *val);
+void	*ft_hmap_get(t_hmap *h, void *key);
+
+int		ft_darr_init(t_darr *a, size_t cap, size_t el_size);
+int		ft_darr_push(t_darr *a, void *el);
+void	*ft_darr_get(t_darr *a, size_t index);
 
 int		ft_dstr_init(t_dstr *s, size_t cap);
 int		ft_dstrputc(t_dstr *dst, char c);
