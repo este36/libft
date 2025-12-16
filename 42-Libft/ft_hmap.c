@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:00 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 01:26:15 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 14:06:27 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)
 	if (!h || cap == 0 || key_size == 0 || val_size == 0)
 		return (-1);
 	ft_bzero(h, sizeof(*h));
-	h->hash_fn = str_ref_hash;
+	h->hash_fn = (t_hmap_hash_fn)str_ref_hash;
+	h->cmp_fn = (t_hmap_cmp_fn)str_ref_eq;
 	h->capacity = cap;
 	h->key_size = key_size;
 	h->val_size = val_size;

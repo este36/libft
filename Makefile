@@ -44,6 +44,7 @@ $(LIBFT_DIR)/ft_utoa.c\
 $(LIBFT_DIR)/ft_dstr.c\
 $(LIBFT_DIR)/ft_darr.c\
 $(LIBFT_DIR)/ft_hmap.c\
+$(LIBFT_DIR)/ft_str_ref.c\
 $(LIBFT_DIR)/ft_strmapi.c\
 $(LIBFT_DIR)/ft_striteri.c\
 $(LIBFT_DIR)/ft_putchar_fd.c\
