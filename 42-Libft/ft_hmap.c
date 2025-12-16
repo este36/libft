@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:00 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 15:03:26 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:38:25 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,27 @@ int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 
 void	*ft_hmap_get(t_hmap *h, void *key)
 {
-	(void)h;
-	(void)key;
+	size_t		slot_index;
+	size_t		i;
+	t_hmap_hash	hash;
+
+	hash = h->hash_fn(key);
+	slot_index = hash % h->capacity;
+	hash |= 2;
+	i = 0;
+	while (i < h->capacity)
+	{
+		slot_index = (slot_index + i) % h->capacity;
+		if (*(t_hmap_hash *)(h->data + slot_index * h->slot_size
+			+ h->hash_off) == HMAP_SLOT_EMPTY)
+			return (NULL);
+		if (ft_memcmp(h->data + slot_index * h->slot_size + h->hash_off,
+				&hash, sizeof(t_hmap_hash)) == 0
+			&& ft_memcmp(h->data + slot_index * h->slot_size + h->key_off,
+				key, h->key_size) == 0)
+			return (h->data + slot_index * h->slot_size + h->val_off);
+		i++;
+	}
 	return (NULL);
 }
 
