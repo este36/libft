@@ -14,18 +14,18 @@
 
 static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {
-	size_t			first_slot;
+	size_t			first_slot_index;
 	t_hmap__slot	slot;
 	t_hmap__slot	tomb;
 	size_t			i;
 
-	first_slot = hash % h->capacity;
+	first_slot_index = hash % h->capacity;
 	i = 0;
 	ft_bzero(&slot, sizeof(slot));
 	ft_bzero(&tomb, sizeof(tomb));
 	while (i < h->capacity)
 	{
-		ft_hmap__slot(h, &slot, (first_slot + i) % h->capacity);
+		ft_hmap__slot(h, &slot, (first_slot_index + i) % h->capacity);
 		if ((*slot.hash == hash && h->cmp_fn(slot.key, key) == 0))
 			return (slot);
 		if (*slot.hash == HMAP_SLOT_DELETED)

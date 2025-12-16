@@ -15,15 +15,15 @@
 static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {
 	t_hmap__slot	slot;
-	size_t			first_slot;
+	size_t			first_slot_index;
 	size_t			i;
 
-	first_slot = hash % h->capacity;
+	first_slot_index = hash % h->capacity;
 	ft_bzero(&slot, sizeof(slot));
 	i = 0;
 	while (i < h->capacity)
 	{
-		ft_hmap__slot(h, &slot, (first_slot + i) % h->capacity);
+		ft_hmap__slot(h, &slot, (first_slot_index + i) % h->capacity);
 		if (*slot.hash == HMAP_SLOT_EMPTY)
 			return ((t_hmap__slot){0});
 		if (*slot.hash == hash && h->cmp_fn(slot.key, key) == 0)
