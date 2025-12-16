@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:00 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/17 00:03:23 by emercier         ###   ########.fr       */
+/*   Updated: 2025/12/17 00:29:40 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_hmap_iter(
 
 int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)
 {
-	const size_t	_a = sizeof(t_max_align);
+	const size_t	_a = alignof(max_align_t) - 1;
 
 	if (!h || val_size == 0)
 		return (-1);
@@ -58,10 +58,10 @@ int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)
 		h->key_size = sizeof(t_str_ref);
 	h->val_size = val_size;
 	h->hash_off = 0;
-	h->key_off = (sizeof(t_hmap_hash) + _a) & ~(_a - 1);
-	h->val_off = (h->key_off + key_size + _a) & ~(_a - 1);
-	h->slot_size = (h->val_off + val_size + _a) & ~(_a - 1);
-	h->data = ft_calloc(cap, h->slot_size);
+	h->key_off = (sizeof(t_hmap_hash) + _a) & ~(_a);
+	h->val_off = (h->key_off + h->key_size + _a) & ~(_a);
+	h->slot_size = (h->val_off + h->val_size + _a) & ~(_a);
+	h->data = ft_calloc(h->capacity, h->slot_size);
 	if (h->data == NULL)
 		return (-1);
 	return (0);

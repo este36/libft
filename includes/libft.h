@@ -50,17 +50,6 @@ int			ft_darr_init(t_darr *a, size_t cap, size_t el_size);
 int			ft_darr_push(t_darr *a, void *el);
 void		*ft_darr_get(t_darr *a, size_t index);
 
-typedef union u_max_align
-{
-	char	c;
-	short	s;
-	int		i;
-	long	l;
-	float	f;
-	double	d;
-	void	*p;
-}	t_max_align;
-
 enum e_hmap_slot_state
 {
 	HMAP_SLOT_EMPTY,
