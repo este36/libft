@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	str_ref_eq(t_str_ref *s1, t_str_ref *s2)
+int	str_ref_cmp(t_str_ref *s1, t_str_ref *s2)
 {
 	if (s1->len != s2->len)
 		return (0);

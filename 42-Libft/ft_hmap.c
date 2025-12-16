@@ -75,8 +75,8 @@ void	*ft_hmap_get(t_hmap *h, void *key)
 			return (NULL);
 		if (ft_memcmp(h->data + slot_index * h->slot_size + h->hash_off,
 				&hash, sizeof(t_hmap_hash)) == 0
-			&& ft_memcmp(h->data + slot_index * h->slot_size + h->key_off,
-				key, h->key_size) == 0)
+			&& h->cmp_fn(
+				h->data + slot_index * h->slot_size + h->key_off, key) == 0)
 			return (h->data + slot_index * h->slot_size + h->val_off);
 		i++;
 	}
@@ -87,13 +87,17 @@ int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)
 {
 	const size_t	_a = sizeof(t_max_align);
 
-	if (!h || cap == 0 || key_size == 0 || val_size == 0)
+	if (!h || val_size == 0)
 		return (-1);
 	ft_bzero(h, sizeof(*h));
 	h->hash_fn = (t_hmap_hash_fn)str_ref_hash;
-	h->cmp_fn = (t_hmap_cmp_fn)str_ref_eq;
+	h->cmp_fn = (t_hmap_cmp_fn)str_ref_cmp;
 	h->capacity = cap;
+	if (h->capacity == 0)
+		h->capacity = 256;
 	h->key_size = key_size;
+	if (h->key_size == 0)
+		h->key_size = sizeof(t_str_ref);
 	h->val_size = val_size;
 	h->hash_off = 0;
 	h->key_off = (sizeof(t_hmap_hash) + _a) & ~(_a - 1);

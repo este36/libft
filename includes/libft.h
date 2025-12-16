@@ -36,7 +36,7 @@ typedef struct s_str_ref
 }	t_str_ref;
 
 t_str_ref	c_str_ref(const char *s);
-int			str_ref_eq(t_str_ref *s1, t_str_ref *s2);
+int			str_ref_cmp(t_str_ref *s1, t_str_ref *s2);
 
 typedef struct s_darr
 {
