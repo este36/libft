@@ -15,7 +15,7 @@
 int	str_ref_cmp(t_str_ref *s1, t_str_ref *s2)
 {
 	if (s1->len != s2->len)
-		return (0);
+		return (s1->len - s2->len);
 	return (ft_memcmp(s1->buf, s2->buf, s1->len));
 }
 
