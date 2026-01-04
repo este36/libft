@@ -6,7 +6,7 @@
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:09:30 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/17 00:03:09 by emercier         ###   ########.fr       */
+/*   Updated: 2026/01/04 13:51:55 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strstr(const char *big, const char *little);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			ft_atoi(const char *nptr);
+double		ft_atod(const char *nptr);
 long		ft_atol(const char *nptr);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_realloc(void *ptr, size_t prev_size, size_t size);

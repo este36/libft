@@ -28,6 +28,7 @@ $(LIBFT_DIR)/ft_bzero.c\
 $(LIBFT_DIR)/ft_strchr.c\
 $(LIBFT_DIR)/ft_strchr_fn.c\
 $(LIBFT_DIR)/ft_atoi.c\
+$(LIBFT_DIR)/ft_atod.c\
 $(LIBFT_DIR)/ft_atol.c\
 $(LIBFT_DIR)/ft_calloc.c\
 $(LIBFT_DIR)/ft_realloc.c\
