@@ -49,7 +49,10 @@ int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 	hash |= 2;
 	slot = _probe(h, key, hash);
 	if (slot.ptr == NULL)
-		return (-1);
+	{
+		if (ft_hmap_resize(h, h->capacity * 2) != 0)
+			return (-1);
+	}
 	ft_memcpy(slot.hash, &hash, sizeof(t_hmap_hash));
 	ft_memcpy(slot.key, key, h->key_size);
 	ft_memcpy(slot.val, val, h->val_size);
