@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdint.h>
+# include "libft.h"
 
 enum e_hmap_slot_state
 {
@@ -27,7 +28,7 @@ typedef uint64_t		t_hmap_hash;
 typedef struct s_hmap	t_hmap;
 typedef t_hmap_hash		(*t_hmap_hash_fn)(void *key);
 typedef int				(*t_hmap_cmp_fn)(void *, void *);
-typedef int				(*t_hmap_iter_cb)(t_hmap *, void *, void *);
+typedef int				(*t_hmap_iter_cb)(void *, void *, void *);
 
 typedef struct s_hmap
 {
