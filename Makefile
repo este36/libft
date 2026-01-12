@@ -94,7 +94,7 @@ GNL_DIR = get_next_line
 GNL_SRCS =\
 $(GNL_DIR)/get_next_line.c\
 
-INCLUDES = -Iincludes
+INCLUDES = -Iinclude
 SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
 OBJS = $(LIBFT_SRCS:%.c=obj/%.o) $(FT_PRINTF_SRCS:%.c=obj/%.o) $(GNL_SRCS:%.c=obj/%.o)
 
