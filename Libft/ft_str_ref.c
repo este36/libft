@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_hmap.h"
 
 int	str_ref_cmp(t_str_ref *s1, t_str_ref *s2)
 {

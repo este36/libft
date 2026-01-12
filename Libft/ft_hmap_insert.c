@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_hmap.h"
 
 static inline t_hmap__slot	_probe(t_hmap *h, void *key, t_hmap_hash hash)
 {

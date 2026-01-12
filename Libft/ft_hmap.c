@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_hmap.h"
 #include <stdalign.h>
 
 void	ft_hmap__slot(t_hmap *h, t_hmap__slot *slot, size_t index)

@@ -13,7 +13,7 @@
 #ifndef FT_PRINTF_SPEC_H
 # define FT_PRINTF_SPEC_H
 
-# include "libft.h"
+# include <libft.h>
 # include <stdarg.h>
 # include <stdbool.h>
 
