@@ -1,8 +1,8 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-LIBFT_DIR = 42-Libft
+LIBFT_DIR = Libft
 LIBFT_SRCS =\
 $(LIBFT_DIR)/ft_isalpha.c\
 $(LIBFT_DIR)/ft_isspace.c\
@@ -71,7 +71,7 @@ $(LIBFT_DIR)/ft_lstclear.c\
 $(LIBFT_DIR)/ft_lstiter.c\
 $(LIBFT_DIR)/ft_lstmap.c\
 
-FT_PRINTF_DIR = 42-ft_printf
+FT_PRINTF_DIR = ft_printf
 FT_PRINTF_SRCS =\
 $(FT_PRINTF_DIR)/ft_printf.c\
 $(FT_PRINTF_DIR)/ft_printf_ops.c\
@@ -90,7 +90,7 @@ $(FT_PRINTF_DIR)/print_ptr.c\
 $(FT_PRINTF_DIR)/print_str.c\
 $(FT_PRINTF_DIR)/print_uint.c\
 
-GNL_DIR = 42-get_next_line
+GNL_DIR = get_next_line
 GNL_SRCS =\
 $(GNL_DIR)/get_next_line.c\
 
