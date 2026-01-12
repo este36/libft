@@ -23,10 +23,7 @@ void	ft_hmap__slot(t_hmap *h, t_hmap__slot *slot, size_t index)
 	slot->val = (slot->ptr + h->val_off);
 }
 
-void	ft_hmap_iter(
-			t_hmap *h,
-			void *user_data,
-			void (*fn)(void *user_data, void *key, void *val))
+int	ft_hmap_iter(t_hmap *h, void *user_data, t_hmap_iter_cb fn)
 {
 	t_hmap__slot	slot;
 	size_t			i;
@@ -37,9 +34,13 @@ void	ft_hmap_iter(
 	{
 		ft_hmap__slot(h, &slot, i);
 		if (*slot.hash > HMAP_SLOT_DELETED)
-			fn(user_data, slot.key, slot.val);
+		{
+			if (fn(user_data, slot.key, slot.val) != 0)
+				return (-1);
+		}
 		i++;
 	}
+	return (0);
 }
 
 int	ft_hmap_init(t_hmap *h, size_t cap, size_t key_size, size_t val_size)

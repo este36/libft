@@ -27,6 +27,7 @@ typedef uint64_t		t_hmap_hash;
 typedef struct s_hmap	t_hmap;
 typedef t_hmap_hash		(*t_hmap_hash_fn)(void *key);
 typedef int				(*t_hmap_cmp_fn)(void *, void *);
+typedef int				(*t_hmap_iter_cb)(t_hmap *, void *, void *);
 
 typedef struct s_hmap
 {
@@ -60,12 +61,13 @@ int			ft_hmap_init(
 int			ft_hmap_insert(t_hmap *h, void *key, void *val);
 int			ft_hmap_delete(t_hmap *h, void *key);
 void		*ft_hmap_get(t_hmap *h, void *key);
+int			ft_hmap_resize(t_hmap *h, size_t new_cap);
 t_hmap_hash	str_ref_hash(t_str_ref *key);
 
-void		ft_hmap_iter(
+int			ft_hmap_iter(
 				t_hmap *h,
 				void *user_data,
-				void (*fn)(void *user_data, void *key, void *val));
+				t_hmap_iter_cb fn);
 
 void		ft_hmap__slot(t_hmap *h, t_hmap__slot *slot, size_t index);
 

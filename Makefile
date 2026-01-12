@@ -47,6 +47,7 @@ $(LIBFT_DIR)/ft_darr.c\
 $(LIBFT_DIR)/ft_hmap.c\
 $(LIBFT_DIR)/ft_hmap_insert.c\
 $(LIBFT_DIR)/ft_hmap_delete.c\
+$(LIBFT_DIR)/ft_hmap_resize.c\
 $(LIBFT_DIR)/ft_hmap_get.c\
 $(LIBFT_DIR)/ft_str_ref.c\
 $(LIBFT_DIR)/ft_strmapi.c\
