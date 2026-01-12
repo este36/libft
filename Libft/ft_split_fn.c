@@ -85,20 +85,6 @@ static int	alloc_substrs(char **dst, const size_t substr_count,
 	return (0);
 }
 
-void	str_arr_free(char **strs)
-{
-	size_t	i;
-
-	i = 0;
-	if (!strs)
-		return ;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-}
-
 char	**ft_split_fn(char const *s, int (*fn)(int c))
 {
 	size_t	substr_count;
