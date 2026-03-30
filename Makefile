@@ -2,6 +2,11 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
+REGEX_DIR = regex
+REGEX_SRCS =\
+$(REGEX_DIR)/ft_regex.c\
+$(REGEX_DIR)/bitmap.c\
+
 LIBFT_DIR = Libft
 LIBFT_SRCS =\
 $(LIBFT_DIR)/ft_isalpha.c\
@@ -96,11 +101,22 @@ GNL_SRCS =\
 $(GNL_DIR)/get_next_line.c\
 
 INCLUDES = -Iinclude
-SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS)
-OBJS = $(LIBFT_SRCS:%.c=obj/%.o) $(FT_PRINTF_SRCS:%.c=obj/%.o) $(GNL_SRCS:%.c=obj/%.o)
+SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(GNL_SRCS) $(REGEX_SRCS)
+OBJS = $(LIBFT_SRCS:%.c=obj/%.o) $(FT_PRINTF_SRCS:%.c=obj/%.o) $(GNL_SRCS:%.c=obj/%.o) $(REGEX_SRCS:%.c=obj/%.o)
+
+TEST = test.out
+
+TEST_SRCS=\
+test/main.c
+
+TEST_OBJS= $(TEST_SRCS:%.c=obj/%.o)
 
 all: $(NAME)
 bonus: $(NAME)
+test: $(TEST)
+
+$(TEST): $(TEST_OBJS) $(NAME)
+	$(CC) -o $@ $(CFLAGS) $(INCLUDES) $^
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
