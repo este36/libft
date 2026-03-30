@@ -5,6 +5,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 REGEX_DIR = regex
 REGEX_SRCS =\
 $(REGEX_DIR)/ft_regex.c\
+$(REGEX_DIR)/thread.c\
+$(REGEX_DIR)/op.c\
 $(REGEX_DIR)/bitmap.c\
 
 LIBFT_DIR = Libft
@@ -123,7 +125,7 @@ $(NAME): $(OBJS)
 
 obj/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+	$(CC) -o $@ -c $(CFLAGS) $(INCLUDES) $<
 
 clean:
 	rm -rf $(OBJS) obj
@@ -132,5 +134,8 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+norm:
+	norminette | grep Error || true
 
 .PHONY: re fclean clean all

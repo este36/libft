@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:13:00 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/17 00:29:40 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/30 18:02:06 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_hmap_iter(t_hmap *h, void *user_data, t_hmap_iter_cb fn)
 {
 	t_hmap__slot	slot;
 	size_t			i;
+	int				ret;
 
 	ft_bzero(&slot, sizeof(slot));
 	i = 0;
@@ -35,8 +36,9 @@ int	ft_hmap_iter(t_hmap *h, void *user_data, t_hmap_iter_cb fn)
 		ft_hmap__slot(h, &slot, i);
 		if (*slot.hash > HMAP_SLOT_DELETED)
 		{
-			if (fn(user_data, slot.key, slot.val) != 0)
-				return (-1);
+			ret = fn(user_data, slot.key, slot.val);
+			if (ret != 0)
+				return (ret);
 		}
 		i++;
 	}
