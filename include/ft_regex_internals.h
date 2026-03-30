@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 13:00:37 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/30 17:47:10 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/30 19:15:19 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,21 @@ typedef struct s_rgx_thread
 	size_t		pc;
 }	t_rgx_thread;
 
+typedef struct s_rgx_ctx
+{
+	int		ret;
+	size_t	executed;
+}	t_rgx_ctx;
+
 typedef int	(*t_rgx_op_fn)(t_rgx_thread*);
 
-int	rgx_op_anchor(t_rgx_thread *t);
-int	rgx_op_split(t_rgx_thread *t);
-int	rgx_op_match(t_rgx_thread *t);
-int	rgx_op_char(t_rgx_thread *t);
-int	rgx_op_class(t_rgx_thread *t);
-int	rgx_op_any(t_rgx_thread *t);
-int	rgx_op_jmp(t_rgx_thread *t);
+int					rgx_op_anchor(t_rgx_thread *t);
+int					rgx_op_split(t_rgx_thread *t);
+int					rgx_op_match(t_rgx_thread *t);
+int					rgx_op_char(t_rgx_thread *t);
+int					rgx_op_class(t_rgx_thread *t);
+int					rgx_op_any(t_rgx_thread *t);
+int					rgx_op_jmp(t_rgx_thread *t);
 
 typedef union u_rgx_bitmap
 {

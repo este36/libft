@@ -7,6 +7,7 @@ REGEX_SRCS =\
 $(REGEX_DIR)/ft_regex.c\
 $(REGEX_DIR)/thread.c\
 $(REGEX_DIR)/op.c\
+$(REGEX_DIR)/op2.c\
 $(REGEX_DIR)/bitmap.c\
 
 LIBFT_DIR = Libft
