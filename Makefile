@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 REGEX_DIR = regex
 REGEX_SRCS =\
-$(REGEX_DIR)/ft_regex.c\
+$(REGEX_DIR)/ft_regex_match.c\
 $(REGEX_DIR)/thread.c\
 $(REGEX_DIR)/op.c\
 $(REGEX_DIR)/op2.c\
