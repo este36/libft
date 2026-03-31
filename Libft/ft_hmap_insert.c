@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:54:44 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 22:44:41 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/31 23:15:00 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	ft_hmap_insert(t_hmap *h, void *key, void *val)
 	ft_memcpy(slot.hash, &hash, sizeof(t_hmap_hash));
 	ft_memcpy(slot.key, key, h->key_size);
 	ft_memcpy(slot.val, val, h->val_size);
+	h->count++;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 19:55:01 by emercier          #+#    #+#             */
-/*   Updated: 2025/12/16 22:45:33 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/31 23:15:37 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int	ft_hmap_delete(t_hmap *h, void *key)
 	if (slot.ptr == NULL)
 		return (-1);
 	*slot.hash = HMAP_SLOT_DELETED;
+	if (h->count)
+		h->count--;
 	return (0);
 }
