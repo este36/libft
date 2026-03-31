@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 20:01:50 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/30 20:01:51 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/31 23:17:25 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	coroutines(t_rgx_ctx *ctx, uint64_t *id, t_rgx_thread	*t)
 	int	r;
 
 	(void)id;
-	ctx->executed++;
 	r = rgx_thread_exec(t);
 	if (r == RGX_SUCCESS)
 		ctx->ret = RGX_SUCCESS;
@@ -35,11 +34,10 @@ static int	rgx_vm_run(t_rgx_vm *vm)
 	while (1)
 	{
 		ctx.ret = -1;
-		ctx.executed = 0;
 		ft_hmap_iter(&vm->threads, &ctx, (t_hmap_iter_cb)coroutines);
 		if (ctx.ret == RGX_SUCCESS || ctx.ret == RGX_MERROR)
 			break ;
-		if (ctx.executed == 0)
+		if (vm->threads.count == 0)
 			break ;
 	}
 	return (ctx.ret);

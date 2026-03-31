@@ -6,7 +6,7 @@
 /*   By: emercier <emercier@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 13:00:37 by emercier          #+#    #+#             */
-/*   Updated: 2026/03/30 19:15:19 by emercier         ###   ########.fr       */
+/*   Updated: 2026/03/31 23:17:43 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct s_rgx_thread
 typedef struct s_rgx_ctx
 {
 	int		ret;
-	size_t	executed;
 }	t_rgx_ctx;
 
 typedef int	(*t_rgx_op_fn)(t_rgx_thread*);

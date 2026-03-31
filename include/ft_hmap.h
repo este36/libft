@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hmap.h                                           :+:    :+:           */
+/*   ft_hmap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emercier <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 16:07:15 by emercier          #+#    #+#             */
-/*   Updated: 2025/11/17 22:54:43 by emercier       ########   odam.nl        */
+/*   Updated: 2026/03/31 23:14:27 by emercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_hmap
 {
 	uint8_t			*data;
 	size_t			capacity;
+	size_t			count;
 	size_t			hash_off;
 	size_t			key_size;
 	size_t			key_off;
